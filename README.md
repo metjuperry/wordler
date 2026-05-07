@@ -1,4 +1,4 @@
-# wordler
+# Metju.Wordler
 
 Lightweight tool to cheat at Wordle.
 
