@@ -12,7 +12,7 @@ list.
 
 ```sh
 npm install
-npm run dev      # http://localhost:5173/wordler/
+npm run dev      # http://localhost:5173
 npm run build    # production bundle in ./dist
 ```
 
