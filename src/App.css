@@ -157,3 +157,41 @@ body {
 }
 
 .footer { margin-top: 24px; text-align: center; color: var(--muted); font-size: 12px; }
+
+.gh-ribbon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 100;
+}
+.gh-ribbon-text {
+  position: absolute;
+  top: 32px;
+  right: -48px;
+  width: 200px;
+  pointer-events: auto;
+  display: block;
+  padding: 6px 0;
+  text-align: center;
+  transform: rotate(45deg);
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.gh-ribbon:hover .gh-ribbon-text {
+  background: var(--green-dark);
+}
+@media (max-width: 480px) {
+  .gh-ribbon { width: 120px; height: 120px; }
+  .gh-ribbon-text { top: 22px; right: -56px; font-size: 11px; padding: 4px 0; }
+}

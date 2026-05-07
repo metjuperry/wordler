@@ -3,6 +3,7 @@ import { LetterRow } from './components/LetterRow';
 import { AbsentInput } from './components/AbsentInput';
 import { ListToggle } from './components/ListToggle';
 import { Results } from './components/Results';
+import { GitHubRibbon } from './components/GitHubRibbon';
 import { filterWords, normalizeAbsent } from './lib/filter';
 import type { Mode } from './lib/types';
 import { ANSWERS } from './data/answers';
@@ -37,6 +38,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <GitHubRibbon href="https://github.com/metjuperry/wordler" />
       <header className="header">
         <h1>Metju.Wordler</h1>
         <p className="tagline">Cheat at Wordle, responsibly.</p>
