@@ -18,8 +18,12 @@ npm run build    # production bundle in ./dist
 
 ## Word lists
 
-Sourced from [3b1b/videos/_2022/wordle/data](https://github.com/3b1b/videos/tree/master/_2022/wordle/data)
+Sourced from [steve-kasica/wordle-words](https://github.com/steve-kasica/wordle-words)
 and bundled at build time into `src/data/answers.ts` and `src/data/allowed.ts`.
+The `answers` list is the original ~2,315-word Wordle answer pool; `allowed`
+is the full ~12,970-word valid-guess list. Note: NYT has tweaked the answer
+pool over time, so the answers list is a snapshot — for full coverage of
+edge cases, use the "All allowed guesses" toggle (which is the default).
 
 ## Deployment
 

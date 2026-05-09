@@ -15,7 +15,7 @@ export default function App() {
   const [greens, setGreens] = useState<(string | null)[]>(EMPTY);
   const [yellows, setYellows] = useState<(string | null)[]>(EMPTY);
   const [absent, setAbsent] = useState('');
-  const [mode, setMode] = useState<Mode>('answers');
+  const [mode, setMode] = useState<Mode>('all');
   const [results, setResults] = useState<string[] | null>(null);
 
   const effectiveAbsent = useMemo(
