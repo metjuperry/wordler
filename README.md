@@ -16,14 +16,11 @@ npm run dev      # http://localhost:5173
 npm run build    # production bundle in ./dist
 ```
 
-## Word lists
+## Word list
 
-Sourced from [steve-kasica/wordle-words](https://github.com/steve-kasica/wordle-words)
-and bundled at build time into `src/data/answers.ts` and `src/data/allowed.ts`.
-The `answers` list is the original ~2,315-word Wordle answer pool; `allowed`
-is the full ~12,970-word valid-guess list. Note: NYT has tweaked the answer
-pool over time, so the answers list is a snapshot — for full coverage of
-edge cases, use the "All allowed guesses" toggle (which is the default).
+Sourced from [dracos/valid-wordle-words.txt](https://gist.github.com/dracos/dd0668f281e685bad51479e5acaadb93)
+— the community-maintained list of valid Wordle words (~14,855) — and
+bundled at build time into `src/data/words.ts`.
 
 ## Deployment
 
