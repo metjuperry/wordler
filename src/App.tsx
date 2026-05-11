@@ -1,13 +1,10 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import { LetterRow } from './components/LetterRow';
 import { AbsentInput } from './components/AbsentInput';
-import { ListToggle } from './components/ListToggle';
 import { Results } from './components/Results';
 import { GitHubRibbon } from './components/GitHubRibbon';
 import { filterWords, normalizeAbsent } from './lib/filter';
-import type { Mode } from './lib/types';
-import { ANSWERS } from './data/answers';
-import { ALLOWED } from './data/allowed';
+import { WORDS } from './data/words';
 
 const EMPTY: (string | null)[] = [null, null, null, null, null];
 
@@ -15,7 +12,6 @@ export default function App() {
   const [greens, setGreens] = useState<(string | null)[]>(EMPTY);
   const [yellows, setYellows] = useState<(string | null)[]>(EMPTY);
   const [absent, setAbsent] = useState('');
-  const [mode, setMode] = useState<Mode>('answers');
   const [results, setResults] = useState<string[] | null>(null);
 
   const effectiveAbsent = useMemo(
@@ -25,8 +21,7 @@ export default function App() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const list = mode === 'answers' ? ANSWERS : ALLOWED;
-    setResults(filterWords({ greens, yellows, absent }, list));
+    setResults(filterWords({ greens, yellows, absent }, WORDS));
   };
 
   const handleClear = () => {
@@ -49,12 +44,9 @@ export default function App() {
         <LetterRow values={yellows} onChange={setYellows} variant="yellow" label="Yellow" />
         <AbsentInput value={absent} onChange={setAbsent} effectiveLetters={effectiveAbsent} />
 
-        <ListToggle
-          mode={mode}
-          onChange={setMode}
-          answersCount={ANSWERS.length}
-          allowedCount={ALLOWED.length}
-        />
+        <div className="wordcount">
+          Searching {WORDS.length.toLocaleString()} valid Wordle words.
+        </div>
 
         <div className="actions">
           <button type="submit" className="btn btn-primary">Find</button>

@@ -5,5 +5,3 @@ export type Constraints = {
   yellows: Slot[];
   absent: string;
 };
-
-export type Mode = 'answers' | 'all';

@@ -16,10 +16,11 @@ npm run dev      # http://localhost:5173
 npm run build    # production bundle in ./dist
 ```
 
-## Word lists
+## Word list
 
-Sourced from [3b1b/videos/_2022/wordle/data](https://github.com/3b1b/videos/tree/master/_2022/wordle/data)
-and bundled at build time into `src/data/answers.ts` and `src/data/allowed.ts`.
+Sourced from [dracos/valid-wordle-words.txt](https://gist.github.com/dracos/dd0668f281e685bad51479e5acaadb93)
+— the community-maintained list of valid Wordle words (~14,855) — and
+bundled at build time into `src/data/words.ts`.
 
 ## Deployment
 
