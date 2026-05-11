@@ -57,18 +57,7 @@ export default function App() {
       <Results words={results} />
 
       <footer className="footer">
-        <p>Yellow tiles mean the letter is in the word but not at that position.</p>
-        <p>
-          Word list from{' '}
-          <a
-            href="https://gist.github.com/dracos/dd0668f281e685bad51479e5acaadb93"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            dracos / valid-wordle-words
-          </a>
-          .
-        </p>
+        <span>Yellow tiles mean the letter is in the word but not at that position.</span>
       </footer>
     </div>
   );
