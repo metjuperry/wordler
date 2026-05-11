@@ -125,7 +125,7 @@ body {
 .btn-ghost:hover { background: var(--chip-bg); }
 
 .results { margin-top: 20px; }
-.results-idle, .results-empty {
+.results-empty {
   padding: 16px; text-align: center; color: var(--muted);
   border: 1px dashed var(--border); border-radius: 8px;
 }

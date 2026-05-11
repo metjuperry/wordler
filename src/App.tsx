@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { useMemo, useState } from 'react';
 import { LetterRow } from './components/LetterRow';
 import { AbsentInput } from './components/AbsentInput';
 import { Results } from './components/Results';
@@ -12,23 +12,27 @@ export default function App() {
   const [greens, setGreens] = useState<(string | null)[]>(EMPTY);
   const [yellows, setYellows] = useState<(string | null)[]>(EMPTY);
   const [absent, setAbsent] = useState('');
-  const [results, setResults] = useState<string[] | null>(null);
 
   const effectiveAbsent = useMemo(
     () => Array.from(normalizeAbsent(absent, greens, yellows)).sort(),
     [absent, greens, yellows],
   );
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setResults(filterWords({ greens, yellows, absent }, WORDS));
-  };
+  const hasConstraints =
+    greens.some(Boolean) || yellows.some(Boolean) || effectiveAbsent.length > 0;
+
+  const matches = useMemo(
+    () =>
+      hasConstraints
+        ? filterWords({ greens, yellows, absent }, WORDS)
+        : (WORDS as readonly string[] as string[]),
+    [greens, yellows, absent, hasConstraints],
+  );
 
   const handleClear = () => {
     setGreens(EMPTY);
     setYellows(EMPTY);
     setAbsent('');
-    setResults(null);
   };
 
   return (
@@ -39,22 +43,28 @@ export default function App() {
         <p className="tagline">Cheat at Wordle, responsibly.</p>
       </header>
 
-      <form onSubmit={handleSubmit} className="form">
+      <form className="form" onSubmit={(e) => e.preventDefault()}>
         <LetterRow values={greens} onChange={setGreens} variant="green" label="Green" />
         <LetterRow values={yellows} onChange={setYellows} variant="yellow" label="Yellow" />
         <AbsentInput value={absent} onChange={setAbsent} effectiveLetters={effectiveAbsent} />
 
-        <div className="wordcount">
-          Searching {WORDS.length.toLocaleString()} valid Wordle words.
+        <div className="wordcount" aria-live="polite">
+          {hasConstraints ? (
+            <>
+              <strong>{matches.length.toLocaleString()}</strong> match
+              {matches.length === 1 ? '' : 'es'} in {WORDS.length.toLocaleString()} valid words
+            </>
+          ) : (
+            <>Searching {WORDS.length.toLocaleString()} valid Wordle words</>
+          )}
         </div>
 
         <div className="actions">
-          <button type="submit" className="btn btn-primary">Find</button>
           <button type="button" className="btn btn-ghost" onClick={handleClear}>Clear</button>
         </div>
       </form>
 
-      <Results words={results} />
+      <Results words={hasConstraints ? matches : null} />
 
       <footer className="footer">
         <span>Yellow tiles mean the letter is in the word but not at that position.</span>
