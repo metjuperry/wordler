@@ -103,6 +103,22 @@ body {
   font-weight: 600;
 }
 
+.toggle { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.toggle-btn {
+  flex: 1;
+  background: transparent;
+  color: var(--fg);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+.toggle-btn + .toggle-btn { border-left: 1px solid var(--border); }
+.toggle-btn.is-on { background: var(--green); color: #fff; }
+.toggle-btn .count { color: var(--muted); font-weight: 400; }
+.toggle-btn.is-on .count { color: rgba(255,255,255,0.8); }
+
 .wordcount {
   font-size: 13px;
   color: var(--muted);

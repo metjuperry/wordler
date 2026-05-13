@@ -16,11 +16,21 @@ npm run dev      # http://localhost:5173
 npm run build    # production bundle in ./dist
 ```
 
-## Word list
+## Word lists
 
-Sourced from [dracos/valid-wordle-words.txt](https://gist.github.com/dracos/dd0668f281e685bad51479e5acaadb93)
-— the community-maintained list of valid Wordle words (~14,855) — and
-bundled at build time into `src/data/words.ts`.
+Both bundled into `src/data/words.ts` at build time:
+
+- **All valid guesses** (~14,855) — [dracos/valid-wordle-words](https://gist.github.com/dracos/dd0668f281e685bad51479e5acaadb93).
+  The full pool of words Wordle will accept as a guess.
+- **Common answers** (~4,512) — the dracos list filtered to words with
+  Google-n-gram occurrence ≥ 1e-7 (from
+  [steve-kasica/wordle-words](https://github.com/steve-kasica/wordle-words)),
+  unioned with the historical NYT answer pool. Approximates the
+  wordlebot's narrower answer pool — drops obscurities like `awmry`,
+  `dooky`, `doody` while keeping things like `hydra` and `agora`.
+
+The UI defaults to "Common answers"; toggle to "All valid guesses" to
+catch edge cases.
 
 ## Deployment
 

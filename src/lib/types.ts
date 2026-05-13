@@ -5,3 +5,5 @@ export type Constraints = {
   yellows: Slot[];
   absent: string;
 };
+
+export type Mode = 'common' | 'all';

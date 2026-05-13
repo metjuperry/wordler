@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 import { LetterRow } from './components/LetterRow';
 import { AbsentInput } from './components/AbsentInput';
+import { ListToggle } from './components/ListToggle';
 import { Results } from './components/Results';
 import { GitHubRibbon } from './components/GitHubRibbon';
 import { filterWords, normalizeAbsent } from './lib/filter';
-import { WORDS } from './data/words';
+import type { Mode } from './lib/types';
+import { WORDS_ALL, WORDS_COMMON } from './data/words';
 
 const EMPTY: (string | null)[] = [null, null, null, null, null];
 
@@ -12,6 +14,7 @@ export default function App() {
   const [greens, setGreens] = useState<(string | null)[]>(EMPTY);
   const [yellows, setYellows] = useState<(string | null)[]>(EMPTY);
   const [absent, setAbsent] = useState('');
+  const [mode, setMode] = useState<Mode>('common');
 
   const effectiveAbsent = useMemo(
     () => Array.from(normalizeAbsent(absent, greens, yellows)).sort(),
@@ -21,12 +24,10 @@ export default function App() {
   const hasConstraints =
     greens.some(Boolean) || yellows.some(Boolean) || effectiveAbsent.length > 0;
 
+  const list = mode === 'common' ? WORDS_COMMON : WORDS_ALL;
   const matches = useMemo(
-    () =>
-      hasConstraints
-        ? filterWords({ greens, yellows, absent }, WORDS)
-        : (WORDS as readonly string[] as string[]),
-    [greens, yellows, absent, hasConstraints],
+    () => (hasConstraints ? filterWords({ greens, yellows, absent }, list) : []),
+    [greens, yellows, absent, hasConstraints, list],
   );
 
   const handleClear = () => {
@@ -48,14 +49,21 @@ export default function App() {
         <LetterRow values={yellows} onChange={setYellows} variant="yellow" label="Yellow" />
         <AbsentInput value={absent} onChange={setAbsent} effectiveLetters={effectiveAbsent} />
 
+        <ListToggle
+          mode={mode}
+          onChange={setMode}
+          commonCount={WORDS_COMMON.length}
+          allCount={WORDS_ALL.length}
+        />
+
         <div className="wordcount" aria-live="polite">
           {hasConstraints ? (
             <>
               <strong>{matches.length.toLocaleString()}</strong> match
-              {matches.length === 1 ? '' : 'es'} in {WORDS.length.toLocaleString()} valid words
+              {matches.length === 1 ? '' : 'es'} in {list.length.toLocaleString()} words
             </>
           ) : (
-            <>Searching {WORDS.length.toLocaleString()} valid Wordle words</>
+            <>Searching {list.length.toLocaleString()} words</>
           )}
         </div>
 
