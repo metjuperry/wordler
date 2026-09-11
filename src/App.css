@@ -103,6 +103,21 @@ body {
   font-weight: 600;
 }
 
+.list-toggle { display: flex; gap: 8px; }
+.list-toggle-btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+.list-toggle-btn.active { background: var(--green); border-color: var(--green-dark); color: #fff; }
+.list-toggle-btn:not(.active):hover { background: var(--chip-bg); }
+
 .wordcount {
   font-size: 13px;
   color: var(--muted);
